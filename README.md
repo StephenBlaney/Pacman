@@ -4,7 +4,7 @@ Pacman game will be devopled using python and the pygame libary
 
 This is the template of every game i start with Pygame, 
 
-```Python``` 
+```Python
 
 import pygame
 import sys
@@ -43,3 +43,4 @@ class App:
 
     def intro_draw(self):
         pygame.display.update()
+```
