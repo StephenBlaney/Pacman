@@ -29,6 +29,8 @@ class App:
         font = pygame.font.SysFont(font_name, size)
         text = font.render(words, False, colour)
         text_size = text.get_size()
+        pos[0] = pos[0] -text_size[0]//2
+        pos[1] = pos[1] -text_size[1]//2
         screen.blit(text, pos)
 
 ########################### INTRO FUNTIONS #################################
@@ -45,5 +47,5 @@ class App:
 
     def start_draw(self):
         self.screen.fill(BLACK)
-        self.draw_text('PUSH SPACE BAR', self.screen, START_TEXT_SIZE,(170, 132, 58),START_FONT)
+        self.draw_text('PUSH SPACE BAR', self.screen,[WIDTH//2, HEIGHT//2], START_TEXT_SIZE,(170, 132, 58),START_FONT)
         pygame.display.update()
