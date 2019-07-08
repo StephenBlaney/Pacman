@@ -18,19 +18,24 @@ class App:
                 self.start_events()
                 self.start_update()
                 self.start_draw()
+            elif self.state =='playing':
+                self.playing_events()
+                self.playing_update()
+                self.playing_draw()
             else:
-                pass
+                self.running = False
             self.clock.tick(FPS)
         pygame.quit()
         sys.exit()
 
 ########################### HELPER FUNTIONS #################################
-    def draw_text(self, words, screen, pos, size, colour, font_name):
+    def draw_text(self, words, screen, pos, size, colour, font_name, centered =False):
         font = pygame.font.SysFont(font_name, size)
         text = font.render(words, False, colour)
         text_size = text.get_size()
-        pos[0] = pos[0] -text_size[0]//2
-        pos[1] = pos[1] -text_size[1]//2
+        if centered:
+            pos[0] = pos[0] -text_size[0]//2
+            pos[1] = pos[1] -text_size[1]//2
         screen.blit(text, pos)
 
 ########################### INTRO FUNTIONS #################################
@@ -47,5 +52,22 @@ class App:
 
     def start_draw(self):
         self.screen.fill(BLACK)
-        self.draw_text('PUSH SPACE BAR', self.screen,[WIDTH//2, HEIGHT//2], START_TEXT_SIZE,(170, 132, 58),START_FONT)
+        self.draw_text('PUSH SPACE BAR', self.screen, [WIDTH//2, HEIGHT//2-50], START_TEXT_SIZE,(170, 132, 58),START_FONT, centered = True)
+        self.draw_text('1 PLAYER ONLY', self.screen, [WIDTH//2, HEIGHT//2+50], START_TEXT_SIZE,(44, 167, 198),START_FONT, centered= True)
+        self.draw_text('HIGH SCORE', self.screen, [4,0], START_TEXT_SIZE,(255,255,255),START_FONT)
+        pygame.display.update()
+        
+
+########################## PLAYING FUNTIONS ##################################
+
+    def playing_events(self):
+        for event in pygame.event.get(): #Gets a list of all the events that have happend since the last time it has been called
+            if event.type == pygame.QUIT: #Player exits and the program is stopped
+                self.running = False
+
+    def playing_update(self):
+        pass
+
+    def playing_draw(self):
+        self.screen.fill(RED)
         pygame.display.update()
