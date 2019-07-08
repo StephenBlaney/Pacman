@@ -11,8 +11,8 @@ class App:
         self.clock = pygame.time.Clock() # Frame Setup
         self.running  = True # Game Running
         self.state = 'start' # Set to intro
-        self.cell_width =WIDTH//28
-        self.cell_height = HEIGHT//30
+        self.cell_width =MAZE_WIDTH//28
+        self.cell_height = MAZE_HEIGHT//30
         self.load() #loads the images before the game starts
 
     def run(self):
@@ -43,13 +43,13 @@ class App:
 
     def load(self):
         self.background = pygame.image.load('background.png')
-        self.background = pygame.transform.scale(self.background,(WIDTH,HEIGHT))
+        self.background = pygame.transform.scale(self.background,(MAZE_WIDTH,MAZE_HEIGHT))
 
     def draw_grid(self):
         for x in range(WIDTH//self.cell_width):
-            pygame.draw.line(self.screen, GREY,(x*self.cell_width, 0),( x*self.cell_width,HEIGHT)) #Paints the vertical grid
+            pygame.draw.line(self.background, GREY,(x*self.cell_width, 0),( x*self.cell_width,HEIGHT)) #Paints the vertical grid
         for x in range(HEIGHT//self.cell_height):
-            pygame.draw.line(self.screen, GREY,(0, x*self.cell_height),(WIDTH,x*self.cell_height)) # Paints the horizontal grid
+            pygame.draw.line(self.background, GREY,(0, x*self.cell_height),(WIDTH,x*self.cell_height)) # Paints the horizontal grid
 
 ########################### INTRO FUNTIONS #################################
 
@@ -82,6 +82,9 @@ class App:
         pass
 
     def playing_draw(self):
-        self.screen.blit(self.background,(0,0))
+        self.screen.fill(BLACK)
+        self.screen.blit(self.background,(TOP_BOTTOM_BUFFER//2,TOP_BOTTOM_BUFFER//2))
         self.draw_grid() # function that will draw the grid in which pacman will traverse
+        self.draw_text('CURRENT SCORE: 0', self.screen, [60,0], 18, WHITE, START_FONT)
+        self.draw_text('HIGH SCORE: 0', self.screen, [WIDTH//2+60,0], 18, WHITE, START_FONT)
         pygame.display.update()
