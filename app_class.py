@@ -1,6 +1,7 @@
 import pygame
 import sys
 from settings import *
+from playerclass import *
 
 pygame.init()
 vec = pygame.math.Vector2
@@ -14,6 +15,7 @@ class App:
         self.cell_width =MAZE_WIDTH//28
         self.cell_height = MAZE_HEIGHT//30
         self.load() #loads the images before the game starts
+        self.player = Player(self, PLAYER_START_POS)
 
     def run(self):
         while self.running:
@@ -87,4 +89,5 @@ class App:
         self.draw_grid() # function that will draw the grid in which pacman will traverse
         self.draw_text('CURRENT SCORE: 0', self.screen, [60,0], 18, WHITE, START_FONT)
         self.draw_text('HIGH SCORE: 0', self.screen, [WIDTH//2+60,0], 18, WHITE, START_FONT)
+        self.player.draw()
         pygame.display.update()
