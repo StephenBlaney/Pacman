@@ -2,7 +2,7 @@ from pygame.math import Vector2 as vec
 
 
 # screen settings
-WIDTH, HEIGHT = 560, 620 # Dimesions of the orignal Pacman game
+WIDTH, HEIGHT = 610, 670 # Dimesions of the orignal Pacman game
 TOP_BOTTOM_BUFFER = 50
 MAZE_WIDTH, MAZE_HEIGHT = WIDTH-TOP_BOTTOM_BUFFER, HEIGHT-TOP_BOTTOM_BUFFER
 FPS = 60
