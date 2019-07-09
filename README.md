@@ -1,6 +1,6 @@
 # Pacman
 
-Pacman game will be devopled using python and the pygame libary 
+Pacman game will be devopled using python and the pygame libary The player controls the titular character, as he must eat all the dots inside an enclosed maze while avoiding four colored ghosts. Eating large flashing "Power Pellets" will cause the ghosts to turn blue and reverse direction, allowing Pac-Man to eat them for bonus points. It was the first game to run on the Namco Pac-Man arcade board
 
 This is the template of every game i start with Pygame, 
 
