@@ -35,7 +35,7 @@ class App:
         pygame.quit()
         sys.exit()
 
-########################### HELPER FUNTIONS #################################
+################################# HELPER FUNTIONS #################################
     def draw_text(self, words, screen, pos, size, colour, font_name, centered =False):
         font = pygame.font.SysFont(font_name, size)
         text = font.render(words, False, colour)
@@ -57,13 +57,15 @@ class App:
                 for xidx, char in enumerate(line):
                     if char == "1":
                         self.walls.append(vec(xidx,yidx))
-        print(len(self.walls))
+
 
     def draw_grid(self):
         for x in range(WIDTH//self.cell_width):
             pygame.draw.line(self.background, GREY,(x*self.cell_width, 0),( x*self.cell_width,HEIGHT)) #Paints the vertical grid
         for x in range(HEIGHT//self.cell_height):
             pygame.draw.line(self.background, GREY,(0, x*self.cell_height),(WIDTH,x*self.cell_height)) # Paints the horizontal grid
+        for wall in self.walls:
+            pygame.draw.rect(self.background, (112,55,163), (wall.x*self.cell_width, wall.y*self.cell_height, self.cell_width,self.cell_height))
 
 ########################### INTRO FUNTIONS #################################
 
@@ -108,7 +110,7 @@ class App:
     def playing_draw(self):
         self.screen.fill(BLACK)
         self.screen.blit(self.background,(TOP_BOTTOM_BUFFER//2,TOP_BOTTOM_BUFFER//2))
-        self.draw_grid() # function that will draw the grid in which pacman will traverse
+        #self.draw_grid() # function that will draw the grid in which pacman will traverse
         self.draw_text('CURRENT SCORE: 0', self.screen, [60,0], 18, WHITE, START_FONT)
         self.draw_text('HIGH SCORE: 0', self.screen, [WIDTH//2+60,0], 18, WHITE, START_FONT)
         self.player.draw()
