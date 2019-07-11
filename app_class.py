@@ -16,6 +16,7 @@ class App:
         self.cell_height = MAZE_HEIGHT//30
         self.player = Player(self, PLAYER_START_POS)
         self.walls = []
+        self.coins = []
 
         self.load() #loads the images before the game starts
 
@@ -57,6 +58,8 @@ class App:
                 for xidx, char in enumerate(line):
                     if char == "1":
                         self.walls.append(vec(xidx,yidx))
+                    elif char == "C":
+                        self.coins.append(vec(xidx,yidx))
 
 
     def draw_grid(self):
@@ -64,8 +67,8 @@ class App:
             pygame.draw.line(self.background, GREY,(x*self.cell_width, 0),( x*self.cell_width,HEIGHT)) #Paints the vertical grid
         for x in range(HEIGHT//self.cell_height):
             pygame.draw.line(self.background, GREY,(0, x*self.cell_height),(WIDTH,x*self.cell_height)) # Paints the horizontal grid
-        for wall in self.walls:
-            pygame.draw.rect(self.background, (112,55,163), (wall.x*self.cell_width, wall.y*self.cell_height, self.cell_width,self.cell_height))
+        for coins in self.coins:
+            pygame.draw.rect(self.background,(167,179,34), (coins.x*self.cell_width, coins.y*self.cell_height, self.cell_width,self.cell_height))
 
 ########################### INTRO FUNTIONS #################################
 
@@ -110,8 +113,16 @@ class App:
     def playing_draw(self):
         self.screen.fill(BLACK)
         self.screen.blit(self.background,(TOP_BOTTOM_BUFFER//2,TOP_BOTTOM_BUFFER//2))
+        self.draw_coins()
         #self.draw_grid() # function that will draw the grid in which pacman will traverse
         self.draw_text('CURRENT SCORE: 0', self.screen, [60,0], 18, WHITE, START_FONT)
         self.draw_text('HIGH SCORE: 0', self.screen, [WIDTH//2+60,0], 18, WHITE, START_FONT)
         self.player.draw()
         pygame.display.update()
+        #self.coins.pop()
+
+    def draw_coins(self):
+        for coin in self.coins:
+            pygame.draw.circle(self.screen,(124, 123,7),
+            (int(coin.x*self.cell_width) + self.cell_width//2+TOP_BOTTOM_BUFFER//2,
+            int(coin.y*self.cell_height)+self.cell_height//2+TOP_BOTTOM_BUFFER//2), 5)
