@@ -2,6 +2,7 @@ import pygame
 import sys
 from settings import *
 from playerclass import *
+from enemy_class import *
 
 pygame.init()
 vec = pygame.math.Vector2
@@ -16,9 +17,12 @@ class App:
         self.cell_height = MAZE_HEIGHT//30
         self.walls = []
         self.coins = []
+        self.enemies = []
+        self.e_pos = []
         self.p_pos = None
         self.load() #loads the images before the game starts
         self.player = Player(self,self.p_pos)
+        self.make_enemies()
 
     def run(self):
         while self.running:
@@ -61,7 +65,13 @@ class App:
                     elif char == "C":
                         self.coins.append(vec(xidx,yidx))
                     elif char == "P":
-                        self.p_pos = vec(xidx,yidx)
+                        self.p_pos = vec(yidx,xidx)
+                    elif char in ["2","3","4","5"]:
+                        self.e_pos.append(vec(xidx,yidx))
+
+    def make_enemies(self):
+        for pos in self.e_pos:
+            self.enemies.append(Enemy(self, pos))
 
 
     def draw_grid(self):
@@ -111,6 +121,9 @@ class App:
 
     def playing_update(self):
         self.player.update()
+        for enemy in self.enemies:
+            enemy.update()
+
 
     def playing_draw(self):
         self.screen.fill(BLACK)
@@ -120,6 +133,10 @@ class App:
         self.draw_text('CURRENT SCORE: {}'.format(self.player.current_score), self.screen, [60,0], 18, WHITE, START_FONT)
         self.draw_text('HIGH SCORE: 0', self.screen, [WIDTH//2+60,0], 18, WHITE, START_FONT)
         self.player.draw()
+
+        for enemy in self.enemies:
+            enemy.draw()
+
         pygame.display.update()
         #self.coins.pop()
 
