@@ -14,11 +14,11 @@ class App:
         self.state = 'start' # Set to intro
         self.cell_width =MAZE_WIDTH//28
         self.cell_height = MAZE_HEIGHT//30
-        self.player = Player(self, PLAYER_START_POS)
         self.walls = []
         self.coins = []
-
+        self.p_pos = None
         self.load() #loads the images before the game starts
+        self.player = Player(self,self.p_pos)
 
     def run(self):
         while self.running:
@@ -60,6 +60,8 @@ class App:
                         self.walls.append(vec(xidx,yidx))
                     elif char == "C":
                         self.coins.append(vec(xidx,yidx))
+                    elif char == "P":
+                        self.p_pos = vec(xidx,yidx)
 
 
     def draw_grid(self):
