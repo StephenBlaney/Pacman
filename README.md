@@ -1,4 +1,4 @@
-![Pacman](https://user-images.githubusercontent.com/22968181/61117991-b4140400-a48f-11e9-94b5-53406fa3179e.png)
+![Pacman](https://user-images.githubusercontent.com/22968181/61118224-271d7a80-a490-11e9-85f6-539a0b888b2e.png)
 
 # Pacman
 
