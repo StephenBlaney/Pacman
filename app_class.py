@@ -68,10 +68,12 @@ class App:
                         self.p_pos = vec(yidx,xidx)
                     elif char in ["2","3","4","5"]:
                         self.e_pos.append(vec(xidx,yidx))
+                    elif char == "B":
+                        pygame.draw.rect(self.background, BLACK, (xidx*self.cell_width, yidx*self.cell_height, self.cell_width, self.cell_height))
 
     def make_enemies(self):
-        for pos in self.e_pos:
-            self.enemies.append(Enemy(self, pos))
+        for idx, pos in enumerate (self.e_pos):
+            self.enemies.append(Enemy(self, pos, idx))
 
 
     def draw_grid(self):
@@ -136,7 +138,6 @@ class App:
 
         for enemy in self.enemies:
             enemy.draw()
-
         pygame.display.update()
         #self.coins.pop()
 
