@@ -10,12 +10,23 @@ class Enemy:
         self.radius = int(self.app.cell_width//2.3)
         self.number = number
         self.colour = self.set_colour()
+        self.direction = vec(1, 0)
+        self.personality = self.set_personality()
+        print(self.personality)
 
     def update(self):
-        pass
+        self.pix_pos+= self.direction
+        if self.time_to_move:
+            self.move()
 
     def draw(self):
             pygame.draw.circle(self.app.screen,self.colour, (int(self.pix_pos.x), int(self.pix_pos.y)),self.radius)
+
+    def time_to_move(self):
+        pass
+
+    def move(self):
+        pass
 
     def get_pix_pos(self):
         return vec((self.grid_pos.x*self.app.cell_width)+TOP_BOTTOM_BUFFER//2 +self.app.cell_width//2,
@@ -31,3 +42,13 @@ class Enemy:
             return (189,29,29)
         if self.number ==3:
              return (215,159,33)
+
+    def set_personality(self):
+        if self.number == 0:
+            return "speedy"
+        if self.number == 1:
+            return "slow"
+        if self.number == 2:
+            return "random"
+        else:
+            return "scared"
